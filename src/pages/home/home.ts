@@ -20,7 +20,6 @@ export class HomePage {
     public navCtrl: NavController,
     public menu: MenuController,
     public auth: AuthService) {
-
   }
 
   ionViewWillEnter() {
@@ -35,7 +34,7 @@ export class HomePage {
     this.creds.email = formLogin.value.email;
     this.creds.senha = formLogin.value.senha;
     this.auth.authenticate(this.creds).subscribe(response => {
-      console.log(response.headers.get('Authorization'));
+      this.auth.sucessfulLogin(response.headers.get('Authorization'));
     }, error => {}
     );
     this.navCtrl.setRoot('CategoriasPage');

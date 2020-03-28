@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, IonicPage, MenuController } from 'ionic-angular';
 import { CredenciaisDTO } from '../../models/credenciais.dto';
 import { NgForm } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 @IonicPage()
 @Component({
@@ -15,7 +16,10 @@ export class HomePage {
     senha: undefined
   }
 
-  constructor(public navCtrl: NavController, public menu: MenuController) {
+  constructor(
+    public navCtrl: NavController,
+    public menu: MenuController,
+    public auth: AuthService) {
 
   }
 
@@ -28,8 +32,12 @@ export class HomePage {
   }
 
   login(formLogin: NgForm) {
-    console.log(formLogin.value.email);
-    console.log(formLogin.value.senha);
+    this.creds.email = formLogin.value.email;
+    this.creds.senha = formLogin.value.senha;
+    this.auth.authenticate(this.creds).subscribe(response => {
+      console.log(response.headers.get('Authorization'));
+    }, error => {}
+    );
     this.navCtrl.setRoot('CategoriasPage');
   }
 

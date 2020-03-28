@@ -35,9 +35,9 @@ export class HomePage {
     this.creds.senha = formLogin.value.senha;
     this.auth.authenticate(this.creds).subscribe(response => {
       this.auth.sucessfulLogin(response.headers.get('Authorization'));
+      this.navCtrl.setRoot('CategoriasPage');
     }, error => {}
     );
-    this.navCtrl.setRoot('CategoriasPage');
   }
 
 }

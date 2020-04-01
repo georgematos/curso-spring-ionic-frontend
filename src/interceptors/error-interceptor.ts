@@ -15,8 +15,6 @@ export class ErrorInterceptor implements HttpInterceptor {
         if (!errorFromApi.status) { // se o error vier como texto puro, converte pra JSON (se tiver o attr status, então é um JSON)
           errorFromApi = JSON.parse(errorFromApi);
         }
-        console.log("Erro capturado pelo interceptor");
-        console.log(errorFromApi);
         return Observable.throw(errorFromApi);
       }) as any;
   }

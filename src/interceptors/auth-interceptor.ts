@@ -11,6 +11,8 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
+    // Inclui o token na requisição
+
     let localUser = this.storage.getLocalUser();
     let n = API_CONFIG.baseUrl.length;
     let requestToAPI = req.url.substring(0, n) == API_CONFIG.baseUrl;

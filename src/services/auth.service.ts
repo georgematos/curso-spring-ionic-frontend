@@ -10,6 +10,7 @@ import { JwtHelper } from "angular2-jwt";
 export class AuthService {
 
   loginUrl: string = API_CONFIG.baseUrl+"/login";
+  refreshTokenUrl: string = API_CONFIG.baseUrl+"/auth/refresh_token"
 
   jwtHelper: JwtHelper = new JwtHelper();
 
@@ -19,6 +20,13 @@ export class AuthService {
 
   authenticate(creds: CredenciaisDTO) {
     return this.http.post(`${this.loginUrl}`, creds, {
+      observe: 'response',
+      responseType: 'text'
+    })
+  }
+
+  refreshToken() {
+    return this.http.post(`${this.refreshTokenUrl}`, {}, {
       observe: 'response',
       responseType: 'text'
     })

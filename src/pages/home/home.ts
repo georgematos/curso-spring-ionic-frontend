@@ -30,6 +30,15 @@ export class HomePage {
     this.menu.swipeEnable(true);
   }
 
+  ionViewDidEnter() {
+    this.auth.refreshToken()
+      .subscribe(response => {
+        this.auth.sucessfulLogin(response.headers.get('Authorization'));
+        this.navCtrl.setRoot('CategoriasPage');
+      },
+      error => {});
+  }
+
   login(formLogin: NgForm) {
     this.creds.email = formLogin.value.email;
     this.creds.senha = formLogin.value.senha;

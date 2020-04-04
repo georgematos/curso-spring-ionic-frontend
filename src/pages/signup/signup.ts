@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { EstadoDTO } from '../../models/estado.dto';
 import { CidadeDTO } from '../../models/cidade.dto';
+import { EstadoDTO } from '../../models/estado.dto';
 import { CidadeService } from '../../services/domain/cidade.service';
 import { EstadoService } from '../../services/domain/estado.service';
 
@@ -53,8 +53,9 @@ export class SignupPage {
       }, error => { })
   }
 
-  sigupUser() {
-    console.log("enviou o form")
+  sigupUser(event: any) {
+    event.preventDefault();
+    console.log("enviou o form");
   }
 
   updateCidades() {

@@ -12,7 +12,7 @@ import { API_CONFIG } from '../../config/api.config';
 })
 export class ProdutosPage {
 
-  public items: Array<ProdutoDTO>;
+  public produtos: Array<ProdutoDTO>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public produtoService: ProdutoService) {
   }
@@ -20,7 +20,7 @@ export class ProdutosPage {
   ionViewDidLoad() {
     this.produtoService.findByCategoria(this.navParams.get("id"))
       .subscribe(respose => {
-        this.items = respose['content'];
+        this.produtos = respose['content'];
         this.loadImageUrls();
       },
       error => {}
@@ -28,13 +28,18 @@ export class ProdutosPage {
   };
 
   loadImageUrls() {
-    for (var i = 0; i < this.items.length; i++) {
-      let item = this.items[i];
+    for (var i = 0; i < this.produtos.length; i++) {
+      let item = this.produtos[i];
       this.produtoService.getSmallImageFromBucket(item.id)
         .subscribe(response => {
           item.imagemUrl = `${API_CONFIG.bucketBaseUrl}/prod${item.id}-small.jpg`;
         }, error => {});
     }
+  }
+
+  showDetails(item: ProdutoDTO) {
+    item.imagemUrl = `${API_CONFIG.bucketBaseUrl}/prod${item.id}.jpg`;
+    this.navCtrl.push('ProdutoDetailPage', {item: item});
   }
 
 }

@@ -9,12 +9,12 @@
 
 <ion-content padding>
   <ion-list>
-    <button ion-item *ngFor="let item of items">
-      <ion-thumbnail item-start>
-        <img [src]="item.imagemUrl || 'assets/imgs/prod.jpg'">
+    <button ion-item *ngFor="let produto of produtos" (click)="showDetails(produto)">
+      <ion-thumbnail produto-start>
+        <img [src]="produto.imagemUrl || 'assets/imgs/prod.jpg'">
       </ion-thumbnail>
-      <h2>{{ item.nome }}</h2>
-      <p>{{ item.preco | currency }}</p>
+      <h2>{{ produto.nome }}</h2>
+      <p>{{ produto.preco | currency }}</p>
     </button>
   </ion-list>
 </ion-content>

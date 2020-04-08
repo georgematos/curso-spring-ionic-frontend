@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { CategoriaService } from '../../services/domain/categoria.service';
+import { API_CONFIG } from '../../config/api.config';
 import { ProdutoDTO } from '../../models/produto.dto';
 import { ProdutoService } from '../../services/domain/produto.service';
-import { API_CONFIG } from '../../config/api.config';
 
 @IonicPage()
 @Component({
@@ -37,9 +36,8 @@ export class ProdutosPage {
     }
   }
 
-  showDetails(item: ProdutoDTO) {
-    item.imagemUrl = `${API_CONFIG.bucketBaseUrl}/prod${item.id}.jpg`;
-    this.navCtrl.push('ProdutoDetailPage', {item: item});
+  showDetails(produto_id: ProdutoDTO) {
+    this.navCtrl.push('ProdutoDetailPage', {produto_id: produto_id});
   }
 
 }

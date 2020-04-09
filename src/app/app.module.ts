@@ -10,11 +10,12 @@ import { MyApp } from './app.component';
 import { CategoriaService } from '../services/domain/categoria.service';
 import { ErrorInterceptorProvider } from '../interceptors/error-interceptor';
 import { AuthService } from '../services/auth.service';
-import { StorageService } from '../services/storag.service';
+import { StorageService } from '../services/storage.service';
 import { ClienteService } from '../services/domain/cliente.service';
 import { AuthInterceptorProvider } from '../interceptors/auth-interceptor';
 import { ProdutoService } from '../services/domain/produto.service';
 import { ProdutoDetailPage } from '../pages/produto-detail/produto-detail';
+import { CartService } from '../services/domain/cart.service';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { ProdutoDetailPage } from '../pages/produto-detail/produto-detail';
     StorageService,
     ClienteService,
     ProdutoService,
-    ProdutoDetailPage
+    ProdutoDetailPage,
+    CartService
   ]
 })
 export class AppModule { }

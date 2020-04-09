@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { ClienteDTO } from "../../models/cliente.dto";
 import { Observable } from "rxjs/Rx";
 import { API_CONFIG } from "../../config/api.config";
-import { StorageService } from "../storag.service";
+import { StorageService } from "../storage.service";
 
 @Injectable()
 export class ClienteService {

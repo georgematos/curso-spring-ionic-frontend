@@ -3,7 +3,7 @@ import { CredenciaisDTO } from "../models/credenciais.dto";
 import { API_CONFIG } from "../config/api.config"
 import { HttpClient } from "@angular/common/http";
 import { LocalUser } from "../models/local_user";
-import { StorageService } from "./storag.service";
+import { StorageService } from "./storage.service";
 import { JwtHelper } from "angular2-jwt";
 
 @Injectable()

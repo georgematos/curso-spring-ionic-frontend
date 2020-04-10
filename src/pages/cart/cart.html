@@ -15,7 +15,11 @@
       </ion-thumbnail>
       <h2>{{ item.produto.nome }}</h2>
       <p>{{ item.produto.preco | currency }}</p>
-      <p>{{ item.quantidade }}</p>
+      <ion-icon class="noline-breaker" color="primary" name="remove-circle" (click)="decrementarQuantidade(item.produto)"></ion-icon>
+      <p class="noline-breaker">{{ item.quantidade }}</p>
+      <ion-icon name="add-circle" color="primary" (click)="incrementarQuantidade(item.produto)"></ion-icon>
+      <ion-icon name="trash" color="danger" item-end (click)="removerProduto(item.produto)"></ion-icon>
     </ion-item>
   </ion-list>
+  <button ion-button block (click)="continuarComprando()">Continuar comprando</button>
 </ion-content>

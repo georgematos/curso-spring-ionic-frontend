@@ -39,23 +39,23 @@ export class PickAddressPage {
             enderecoDeEntrega: null,
             pagamento: null,
             itens: cart.itens.map(item => { // transforma cada item do carrinho em um objeto da lista de pedidos
-               return { quantidade: item.quantidade, produto: { id: item.produto.id } }
+              return { quantidade: item.quantidade, produto: { id: item.produto.id } }
             })
           }
         },
-        (error: { status: number; }) => {
-          if (error.status == 403) {
-            this.navCtrl.setRoot('HomePage');
-          }
-        });
+          (error: { status: number; }) => {
+            if (error.status == 403) {
+              this.navCtrl.setRoot('HomePage');
+            }
+          });
     } else {
       this.navCtrl.setRoot('HomePage');
     }
   }
 
   nextPage(item: EnderecoDTO) {
-    this.pedido.enderecoDeEntrega = {id: item.id};
-    console.log(this.pedido);
+    this.pedido.enderecoDeEntrega = { id: item.id };
+    this.navCtrl.push("PaymentPage", { pedido: this.pedido });
   }
 
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, Loading, LoadingController, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, Loading, LoadingController, NavController, NavParams, Refresher } from 'ionic-angular';
 import { API_CONFIG } from '../../config/api.config';
 import { ProdutoDTO } from '../../models/produto.dto';
 import { ProdutoService } from '../../services/domain/produto.service';
@@ -21,27 +21,28 @@ export class ProdutosPage {
   ) { }
 
   ionViewDidLoad() {
-    let loader = this.presentLoading();
     this.produtoService.findByCategoria(this.navParams.get("id"))
       .subscribe(
         respose => {
           this.produtos = respose['content'];
-          loader.dismiss()
           this.loadImageUrls();
         }, error => {
-          loader.dismiss()
         }
       );
   };
 
-  loadImageUrls() {
+  loadImageUrls()  {
+    let loader = this.presentLoading();
     for (var i = 0; i < this.produtos.length; i++) {
       let item = this.produtos[i];
       this.produtoService.getSmallImageFromBucket(item.id)
-        .subscribe(response => {
-          item.imagemUrl = `${API_CONFIG.bucketBaseUrl}/prod${item.id}-small.jpg`;
-        }, error => { });
+        .subscribe(
+          response => {
+            item.imagemUrl = `${API_CONFIG.bucketBaseUrl}/prod${item.id}-small.jpg`;
+          }, error => { }
+        );
     }
+    loader.dismiss();
   }
 
   showDetails(produto_id: ProdutoDTO) {
@@ -56,4 +57,10 @@ export class ProdutosPage {
     return loader;
   }
 
+  doRefresh(refresher: Refresher) {
+    this.ionViewDidLoad();
+    setTimeout(() => {
+      refresher.complete();
+    }, 1000);
+  }
 }

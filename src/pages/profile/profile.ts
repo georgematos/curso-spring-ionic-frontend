@@ -49,7 +49,6 @@ export class ProfilePage {
       }, error => {});
   }
 
-
   getCameraPicture() {
     this.cameraOn = true;
     const options: CameraOptions = {
@@ -66,4 +65,15 @@ export class ProfilePage {
      });
   }
 
+  sendPicture() {
+    this.clienteService.uploadPicture(this.picture)
+      .subscribe(response => {
+        this.picture = null;
+        this.ionViewDidLoad();
+      }, error => {});
+  }
+
+  cancel() {
+    this.picture = null;
+  }
 }

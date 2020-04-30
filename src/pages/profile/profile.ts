@@ -121,6 +121,7 @@ export class ProfilePage {
       .subscribe(response => {
         this.picture = null;
         this.getImageIfExists();
+        this.loadData();
       },
         error => {
         });
